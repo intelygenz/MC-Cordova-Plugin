@@ -267,6 +267,8 @@ public class MCCordovaPlugin extends CordovaPlugin implements UrlHandler {
                 return getContactKey();
             case "logSdkState":
                 return logSdkState();
+            case "switchBusinessUnit":
+                return switchBusinessUnit();
             default:
                 return null;
         }
