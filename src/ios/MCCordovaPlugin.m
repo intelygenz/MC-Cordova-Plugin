@@ -119,6 +119,10 @@ const int LOG_LENGTH = 800;
 }
 
 - (void)pluginInitialize {
+    [self pluginInitialize: self.commandDelegate.settings];
+}
+
+- (void)pluginInitializeWithDictionary:(NSDictionary *)dictionary {
     if ([MarketingCloudSDK sharedInstance] == nil) {
         // failed to access the MarketingCloudSDK
         os_log_error(OS_LOG_DEFAULT, "Failed to access the MarketingCloudSDK");
@@ -400,6 +404,38 @@ const int LOG_LENGTH = 800;
     if (self.cachedNotification != nil) {
         [self sendNotificationEvent:self.cachedNotification];
         self.cachedNotification = nil;
+    }
+}
+
+- (void)switchBusinessUnit:(CDVInvokedUrlCommand *)command {
+    if (command.arguments != nil && [command.arguments count] > 0) {
+        NSString *accessToken = command.arguments[0];
+        NSString *appId = command.arguments[1];
+        NSString *endpoint = command.arguments[2];
+        [[MarketingCloudSDK sharedInstance] sfmc_tearDown];
+
+        NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+        NSDictionary *oldDict = (NSDictionary *)[dataArray objectAtIndex:0];
+        [newDict addEntriesFromDictionary:self.commandDelegate.settings];
+        if(accessToken != nil) {
+            [newDict setObject:accessToken forKey:@"com.salesforce.marketingcloud.access_token"];
+        }
+        if(appId != nil) {
+            [newDict setObject:appId forKey:@"com.salesforce.marketingcloud.app_id"];
+        }
+        if(endpoint != nil) {
+            [newDict setObject:endpoint forKey:@"com.salesforce.marketingcloud.tenant_specific_endpoint"];
+        }
+
+        [pluginInitializeWithDictionary: newDict]
+
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                                        messageAsInt:1]
+                                        callbackId:command.callbackId];
+    } else {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                                            messageAsInt:0]
+                                            callbackId:command.callbackId];
     }
 }
 

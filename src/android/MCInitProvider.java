@@ -39,7 +39,7 @@ import com.salesforce.marketingcloud.MarketingCloudSdk;
 import com.salesforce.marketingcloud.registration.RegistrationManager;
 
 public class MCInitProvider
-    extends ContentProvider implements MarketingCloudSdk.InitializationListener {
+    extends ContentProvider {
     @Override
     public boolean onCreate() {
         Context ctx = getContext();
@@ -47,7 +47,7 @@ public class MCInitProvider
             MarketingCloudConfig.Builder builder = MCSdkConfig.prepareConfigBuilder(ctx);
             if (builder != null) {
                 builder.setUrlHandler(MCSdkListener.INSTANCE);
-                MarketingCloudSdk.init(ctx, builder.build(ctx), this);
+                MarketingCloudSdk.init(ctx, builder.build(ctx), new MCInitializationListener());
             }
         }
         return false;
@@ -84,17 +84,4 @@ public class MCInitProvider
         return 0;
     }
 
-    @Override
-    public void complete(@NonNull InitializationStatus status) {
-        if (status.isUsable()) {
-            MarketingCloudSdk.requestSdk(new MarketingCloudSdk.WhenReadyListener() {
-                @Override
-                public void ready(@NonNull MarketingCloudSdk marketingCloudSdk) {
-                    RegistrationManager registrationManager =
-                        marketingCloudSdk.getRegistrationManager();
-                    registrationManager.edit().addTag("Cordova").commit();
-                }
-            });
-        }
-    }
 }

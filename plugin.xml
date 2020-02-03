@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-marketingcloudsdk" version="6.4.0" 
+<plugin id="cordova-plugin-marketingcloudsdk" version="6.5.0" 
   xmlns="http://apache.org/cordova/ns/plugins/1.0" 
   xmlns:android="http://schemas.android.com/apk/res/android">
 
   <name>MCCordovaPlugin</name>
 
-  <description>A Cordova Plugin to access the native Salesforce Marketing Cloud MobilePush SDKs</description>
+  <description>A Cordova Plugin to access the native Salesforce Marketing Cloud MobilePush SDKs(Fork: https://github.com/salesforce-marketingcloud/MC-Cordova-Plugin(v6.4.0))</description>
 
-  <repo>https://github.com/salesforce-marketingcloud/MC-Cordova-Plugin</repo>
+  <repo>https://github.com/intelygenz/MC-Cordova-Plugin</repo>
 
   <license>BSD-3-Clause</license>
 
@@ -64,7 +64,7 @@
         <source url="https://github.com/CocoaPods/Specs.git"/>
       </config>
       <pods use-frameworks="true">
-        <pod name="MarketingCloudSDK" spec="~> 6.4" />
+        <pod name="MarketingCloudSDK" spec="~> 6.5" />
       </pods>
     </podspec>
     <framework src="CoreLocation.framework/" /> 

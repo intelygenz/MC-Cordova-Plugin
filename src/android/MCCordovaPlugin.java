@@ -267,8 +267,55 @@ public class MCCordovaPlugin extends CordovaPlugin implements UrlHandler {
                 return getContactKey();
             case "logSdkState":
                 return logSdkState();
+            case "switchBusinessUnit":
+                return switchBusinessUnit();
             default:
                 return null;
+        }
+    }
+
+    private Context getContext() {
+        return webView.getView().getContext();
+    }
+
+    private ActionHandler switchBusinessUnit() {
+        return new ActionHandler() {
+            @Override
+            public void execute(MarketingCloudSdk sdk, JSONArray args, CallbackContext callbackContext) {
+                if(args != null && args.length() > 0 ) {
+                    String accessToken = args.get(0);
+                    String appId = args.get(1);
+                    String endpoint = args.get(2);
+                    Context ctx = getContext();
+                    if (ctx != null) {
+                        MarketingCloudConfig.Builder builder = MCSdkConfig.prepareConfigBuilder(ctx);
+                        if (builder != null) {
+                            if(accessToken != null) {
+                                builder.setAccessToken(accessToken);
+                            }
+                            if(appId != null) {
+                                builder.setApplicationId(appId);
+                            }
+                            if(endpoint != null) {
+                                builder.setMarketingCloudServerUrl(endpoint);
+                            }
+                            builder.setUrlHandler(MCSdkListener.INSTANCE);
+                            MarketingCloudSdk.init(ctx, builder.build(ctx), new MCInitializationListener());
+                            callbackContext.success(1)
+                        } else {
+                            callbackContext.success(0)
+                        }
+                    } else {
+                        callbackContext.success(0)
+                    }
+
+                } else {
+                    callbackContext.success(0)
+                }
+
+
+
+            }
         }
     }
 
