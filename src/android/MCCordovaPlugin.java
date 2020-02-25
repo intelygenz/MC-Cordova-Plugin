@@ -301,16 +301,16 @@ public class MCCordovaPlugin extends CordovaPlugin implements UrlHandler {
                             }
                             builder.setUrlHandler(MCSdkListener.INSTANCE);
                             MarketingCloudSdk.init(ctx, builder.build(ctx), new MCInitializationListener());
-                            callbackContext.success(1)
+                            callbackContext.success(1);
                         } else {
-                            callbackContext.success(0)
+                            callbackContext.success(0);
                         }
                     } else {
-                        callbackContext.success(0)
+                        callbackContext.success(0);
                     }
 
                 } else {
-                    callbackContext.success(0)
+                    callbackContext.success(0);
                 }
 
 
