@@ -316,7 +316,7 @@ public class MCCordovaPlugin extends CordovaPlugin implements UrlHandler {
 
 
             }
-        }
+        };
     }
 
     private ActionHandler getContactKey() {
