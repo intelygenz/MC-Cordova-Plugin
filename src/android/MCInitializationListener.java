@@ -8,7 +8,9 @@ import com.salesforce.marketingcloud.registration.RegistrationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-public class MCInitializationListener implements MarketingCloudSdk.InitializationListener {
+import com.salesforce.marketingcloud.InitializationListener;
+
+public class MCInitializationListener implements InitializationListener {
 
     @Override
     public void complete(@NonNull InitializationStatus status) {
