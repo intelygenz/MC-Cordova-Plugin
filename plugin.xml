@@ -64,7 +64,7 @@
         <source url="https://github.com/CocoaPods/Specs.git"/>
       </config>
       <pods use-frameworks="true">
-        <pod name="MarketingCloudSDK" spec="~> 6.5" />
+        <pod name="MarketingCloudSDK" spec="~> 6.4" />
       </pods>
     </podspec>
     <framework src="CoreLocation.framework/" /> 
