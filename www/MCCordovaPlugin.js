@@ -323,7 +323,7 @@ var MCCordovaPlugin = {
      * @see  {@link https://salesforce-marketingcloud.github.io/MarketingCloudSDK-iOS/sdk-implementation/business-unit-switching.html |iOS Docs}
      */
     switchBusinessUnit: function (accessToken, appId, endpoint, successCallback, errorCallback) {
-        argsCheck.checkArgs('sFF', PLUGIN_NAME + '.switchBusinessUnit', arguments);
+        argsCheck.checkArgs('sssFF', PLUGIN_NAME + '.switchBusinessUnit', arguments);
         _exec(successCallback, errorCallback, 'switchBusinessUnit', [accessToken, appId, endpoint]);
     },
 
