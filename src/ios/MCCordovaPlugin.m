@@ -427,11 +427,15 @@ const int LOG_LENGTH = 800;
             [newDict setObject:endpoint forKey:@"com.salesforce.marketingcloud.tenant_specific_endpoint"];
         }
 
-        [self.pluginInitializeWithDictionary: newDict]
+        [self.pluginInitializeWithDictionary: newDict];
 
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:1] callbackId:command.callbackId];
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                                        messageAsInt:(success) ? 1 : 0]
+                                        callbackId:command.callbackId];
     } else {
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:0] callbackId:command.callbackId];
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                                        messageAsInt:(success) ? 1 : 0]
+                                        callbackId:command.callbackId];
     }
 }
 
