@@ -119,7 +119,7 @@ const int LOG_LENGTH = 800;
 }
 
 - (void)pluginInitialize {
-    [self pluginInitialize: self.commandDelegate.settings];
+    [self pluginInitializeWithDictionary: self.commandDelegate.settings];
 }
 
 - (void)pluginInitializeWithDictionary:(NSDictionary *)dictionary {
@@ -415,7 +415,6 @@ const int LOG_LENGTH = 800;
         [[MarketingCloudSDK sharedInstance] sfmc_tearDown];
 
         NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
-        // NSDictionary *oldDict = (NSDictionary *)[dataArray objectAtIndex:0];
         [newDict addEntriesFromDictionary:self.commandDelegate.settings];
         if(accessToken != nil) {
             [newDict setObject:accessToken forKey:@"com.salesforce.marketingcloud.access_token"];
@@ -427,7 +426,7 @@ const int LOG_LENGTH = 800;
             [newDict setObject:endpoint forKey:@"com.salesforce.marketingcloud.tenant_specific_endpoint"];
         }
 
-        // [self pluginInitializeWithDictionary: newDict];
+        [self pluginInitializeWithDictionary: newDict];
 
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                                         messageAsInt:1]
